@@ -5,6 +5,11 @@ tool manifests used to check out Torizon OS: the set of Yocto layers, their
 git remotes, and the revisions to build each supported vendor/SoC platform
 from.
 
+> [!WARNING]
+> The release manifest should be avoided until Torizon OS 8 is officially released.
+> Their pinned revisions are not validated yet and Torizon OS may not build with
+> them.
+
 ## Supported vendors
 
 Each vendor lives in its own folder under `torizon/`:
@@ -32,7 +37,7 @@ Within a vendor folder, the manifest filename says what it locks down:
 - **`next.xml`** - the manifest where all layers are on bleeding edge. No
   hash pinned, every layer tracking the HEAD of it's branch.
 - **`integration.xml`** - the manifest used for Torizon OS development. All
-  external layers (non-Toradex) are pinned, and all Torizon and Toradex layers
+  external layers (non-Torizon) are pinned, and all Torizon layers
   are on bleeding edge.
 - **`release.xml`** - the manifest used to do our `monthly`/`quarterly`
   releases. All hashes are pinned, so anyone can checkout a release version tag
