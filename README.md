@@ -61,8 +61,8 @@ targeting (see the table above).
 `.github/workflows/manifest-ci.yml` runs on every push/PR to `wrynose-8.x.y`:
 
 - **lint xml** - every `*.xml` in the repo must be well-formed.
-- **repo init/sync (\<vendor\>)** - for each vendor folder, a real
-  `repo init` + `repo sync` against that vendor's `release.xml`, at the
+- **repo init/sync (\<vendor\> \<manifest\>)** - for each vendor folder, a real
+  `repo init` + `repo sync` against that vendor's manifests, at the
   exact commit under test. It's shallow and blob-less
   (`--depth=1 --clone-filter=blob:none`) so it stays fast while still
   proving every include, remote, and revision actually resolves - not a

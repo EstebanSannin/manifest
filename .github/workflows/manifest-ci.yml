@@ -27,7 +27,7 @@ jobs:
           exit $status
 
   repo-init-sync:
-    name: repo init/sync (${{ matrix.vendor }})
+    name: repo init/sync (${{ matrix.vendor }} ${{ matrix.manifest }})
     runs-on: ubuntu-latest
     needs: lint-xml
     timeout-minutes: 20
@@ -35,6 +35,18 @@ jobs:
       fail-fast: false
       matrix:
         vendor: [tdx, syn, ti, x86, nvidia, nxp, mtk]
+        manifest: [next, integration, release]
+        exclude:
+          # syn and mtk have no wrynose branch yet, so they only
+          # ship next.xml - no integration.xml/release.xml to sync yet.
+          - vendor: syn
+            manifest: integration
+          - vendor: syn
+            manifest: release
+          - vendor: mtk
+            manifest: integration
+          - vendor: mtk
+            manifest: release
     steps:
       - uses: actions/checkout@v4
 
@@ -55,20 +67,20 @@ jobs:
           # networks/firewalls block; rewrite to https so sync doesn't hang
           git config --global url."https://".insteadOf git://
 
-      - name: repo init (${{ matrix.vendor }})
+      - name: repo init (${{ matrix.vendor }} ${{ matrix.manifest }})
         run: |
-          mkdir -p /tmp/repo-checkout-${{ matrix.vendor }}
-          cd /tmp/repo-checkout-${{ matrix.vendor }}
+          mkdir -p "/tmp/repo-checkout-${{ matrix.vendor }}-${{ matrix.manifest }}"
+          cd "/tmp/repo-checkout-${{ matrix.vendor }}-${{ matrix.manifest }}"
           timeout 5m repo init \
             -u "file://${{ github.workspace }}" \
             -b "${{ github.sha }}" \
-            -m "torizon/${{ matrix.vendor }}/next.xml" \
+            -m "torizon/${{ matrix.vendor }}/${{ matrix.manifest }}.xml" \
             --manifest-depth=1 \
             --depth=1 \
             --clone-filter=blob:none \
             -q < /dev/null
 
-      - name: repo sync (${{ matrix.vendor }})
+      - name: repo sync (${{ matrix.vendor }} ${{ matrix.manifest }})
         run: |
-          cd /tmp/repo-checkout-${{ matrix.vendor }}
+          cd "/tmp/repo-checkout-${{ matrix.vendor }}-${{ matrix.manifest }}"
           timeout 15m repo sync --no-tags --optimized-fetch -j4
