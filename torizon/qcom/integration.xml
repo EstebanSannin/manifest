@@ -6,6 +6,7 @@
   <remote alias="repo" fetch="https://github.com/uptane" name="uptane"/>
   <remote alias="repo" fetch="https://github.com/iris-GmbH" name="iris"/>
   <remote alias="repo" fetch="https://github.com/torizon" name="torizon"/>
+  <remote alias="repo" fetch="https://github.com/EstebanSannin" name="estebansannin"/>
 
   <default sync-j="4" sync-s="true"/>
 
@@ -24,6 +25,8 @@
   <project name="meta-lts-mixins" remote="yp" path="layers/meta-lts-mixins" revision="71dfb81bd98f59ca2127d39b100ecbb8ce1e0ba3" upstream="wrynose/linux-firmware"/>
   <project name="meta-qcom" remote="qcom" path="layers/meta-qcom" revision="b427040c7482e6c963089d76c5d0ab3cf8c2a7bb" upstream="wrynose"/>
   <project name="meta-qcom-arduino" remote="qcom" path="layers/meta-qcom-arduino" revision="8968bc46d4824422c35d095115b4861e1b3cf6a5" upstream="wrynose"/>
+  <!-- Arduino App Lab support (machine feature arduino-applab) -->
+  <project name="meta-arduino-applab" remote="estebansannin" path="layers/meta-arduino-applab" revision="606977ec8921fe7386d81c5b4bafc4de10c8e5b0" upstream="wrynose"/>
 
   <project name="meta-updater" remote="uptane" path="layers/meta-updater" revision="92f4788c30fdcab2d376eb9ae6b191bda7d06d0a" upstream="wrynose"/>
   <project name="meta-cyclonedx" remote="iris" path="layers/meta-cyclonedx" revision="5b9d37f5d5cbab0c9fb59b46e3ebe4c7ef78887f" upstream="wrynose"/>
