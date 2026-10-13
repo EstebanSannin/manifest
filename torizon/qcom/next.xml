@@ -27,6 +27,8 @@
 
   <project name="meta-updater" remote="uptane" path="layers/meta-updater" revision="wrynose" upstream="wrynose"/>
   <project name="meta-cyclonedx" remote="iris" path="layers/meta-cyclonedx" revision="wrynose" upstream="wrynose"/>
+  <!-- Arduino App Lab support (machine feature arduino-applab) -->
+  <project name="meta-arduino-applab" remote="torizon" path="layers/meta-arduino-applab" revision="wrynose" upstream="wrynose"/>
   <project name="meta-torizon" remote="torizon" path="layers/meta-torizon" revision="wrynose-8.x.y" upstream="wrynose-8.x.y"/>
   <project name="meta-torizon-bsp" remote="torizon" path="layers/meta-torizon-bsp" revision="wrynose-8.x.y" upstream="wrynose-8.x.y">
     <linkfile dest="setup-environment" src="scripts/setup-environment"/>
